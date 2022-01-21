@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="RunAll" type="CompoundRunConfigurationType">
+    <toRun name="MPlaygroud.UserService" type="LaunchSettings" />
+    <toRun name="MPlayground.WebApi" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>
