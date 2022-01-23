@@ -30,7 +30,6 @@ consumer.Received += async (sender, basicDeliverEventArgs) =>
     {
         Console.WriteLine(ex);
     }
-
 };
 
 channel.BasicConsume(queue: "interceptor-queue",
@@ -38,14 +37,12 @@ channel.BasicConsume(queue: "interceptor-queue",
     consumer: consumer);
 
 Console.WriteLine("Subscribed to the queue 'interceptor-queue'");
-
 Console.ReadLine();
 
-
+///-----------------------------------------------------------------
 
 async Task ConsumeMessage(BasicDeliverEventArgs basicDeliverEventArgs1, ConcurrentBag<Guid> concurrentBag, MessageDbLogger messageDbLogger)
 {
-
     var contentType = GetContentType(basicDeliverEventArgs1);
     if (contentType == "application/vnd.masstransit+json")
     {
@@ -54,11 +51,11 @@ async Task ConsumeMessage(BasicDeliverEventArgs basicDeliverEventArgs1, Concurre
         if (concurrentBag.Contains(messageBase.MessageId))
             return;
         concurrentBag.Add(messageBase.MessageId);
-        await messageDbLogger.LogMessage(messageBase, messageBody);
+        await messageDbLogger.LogMessage(messageBase, messageBody, basicDeliverEventArgs1);
+        
         Console.WriteLine($" Intercepted message: {messageBase.GetMessageTypeShort()} {messageBase.MessageId}");
     }
 }
-
 
 string GetContentType(BasicDeliverEventArgs basicDeliverEventArgs)
 {

@@ -16,9 +16,19 @@ END
 CREATE TABLE MessageLog (
     MessageId UNIQUEIDENTIFIER Primary Key,
     MessageType NVARCHAR(255),
+    ReceivedDate DATETIME,
+    MachineName NVARCHAR(1024),
+    Assembly NVARCHAR(1024),
+    ProcessName NVARCHAR(1024),
     ConversationId UNIQUEIDENTIFIER,
-    MessageBody NVARCHAR(MAX),
-    ReceivedDate DATETIME
+    MessageInfo NVARCHAR(MAX),
+    MessageBody NVARCHAR(MAX)    
 )
+
+create index MessageLog_ReceivedDate_index
+    on MessageLog (ReceivedDate desc)
+    go
+
+
 
  
