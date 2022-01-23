@@ -16,3 +16,11 @@ services:
       #RABBITMQ_DEFAULT_VHOST: dev
       RABBITMQ_LOG_BASE: "/var/log/rabbitmq"
       #RABBITMQ_CONFIG_FILE: /etc/rabbitmq/rabbitmq.config
+
+  mssql:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      SA_PASSWORD: "SqlUser00"
+      ACCEPT_EULA: "Y"
+    ports:
+      - 5433:1433
