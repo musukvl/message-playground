@@ -3,7 +3,7 @@
   "profiles": {
     "MessageTools": {
       "commandName": "Project",
-      "commandLineArgs": "intercept-messages -c \"server=.;database=MessageLog;integrated security=true;TrustServerCertificate=true;\" -u QueueUser -p QueueUser00",
+      "commandLineArgs": "intercept-messages -c \"Server=localhost,5433;Database=MessageLogDb;User=sa;Password=SqlUser00;TrustServerCertificate=true;MultipleActiveResultSets=true\" -u QueueUser -p QueueUser00",
       "environmentVariables": {        
       }
     }
