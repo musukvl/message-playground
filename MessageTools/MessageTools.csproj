@@ -8,12 +8,15 @@
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
+        <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.0.0" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="RabbitMQ.Client" Version="6.2.2" />
         <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+        <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
     </ItemGroup>
     <ItemGroup>
-      <None Update="ddl.sql">
+      <None Update="MessageLogger\ddl.sql">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

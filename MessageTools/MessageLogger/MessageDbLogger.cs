@@ -1,11 +1,12 @@
 using System.Data;
 using System.Data.SqlClient;
+using MessageTools.Interceptor;
 using Newtonsoft.Json;
 using RabbitMQ.Client.Events;
 
-namespace MPlayground.MessageInterceptor;
+namespace MessageTools.MessageLogger;
 
-public class MessageDbLogger : IDisposable
+public class MessageDbLogger : IDisposable, IMessageLogger
 {
     private readonly SqlConnection _connection;
     
@@ -25,7 +26,7 @@ public class MessageDbLogger : IDisposable
     const string INSERT_SQL = @"insert into MessageLog (MessageId, MessageType, ConversationId, MessageBody, ReceivedDate, MachineName, ProcessName, Assembly,MessageInfo) 
             values (@MessageId, @MessageType, @ConversationId, @MessageBody, @ReceivedDate, @MachineName, @ProcessName, @Assembly, @MessageInfo);";
     
-    public async Task LogMessage(MassTransitMessageBase messageBase, string messageBody, BasicDeliverEventArgs eventArgs)
+    public async Task LogMassTransitMessage(MassTransitMessageBase messageBase, string messageBody, BasicDeliverEventArgs eventArgs)
     {
         await using SqlCommand command = new SqlCommand(INSERT_SQL, _connection);
         command.Parameters.Add(new SqlParameter()
@@ -81,6 +82,13 @@ public class MessageDbLogger : IDisposable
         await command.PrepareAsync();
         await command.ExecuteNonQueryAsync();
     }
+
+    public Task LogUnknownContentTypeMessage(string contentType, BasicDeliverEventArgs basicDeliverEventArgs1)
+    {
+        //Console.WriteLine($"[{basicDeliverEventArgs1..SentTime.ToString("yyyy-MM-dd HH:mm:ss")}]: {messageBase.GetMessageTypeShort()} from {messageBase.Host.ProcessName} {messageBase.ConversationId}");
+        return Task.CompletedTask;
+    }
+    
 
     public void Dispose()
     {

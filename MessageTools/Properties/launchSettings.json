@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "profiles": {
+    "MessageTools": {
+      "commandName": "Project",
+      "commandLineArgs": "intercept-messages -c \"server=.;database=MessageLog;integrated security=true;TrustServerCertificate=true;\" -u QueueUser -p QueueUser00",
+      "environmentVariables": {        
+      }
+    }
+  }
+}

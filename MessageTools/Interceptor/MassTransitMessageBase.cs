@@ -1,4 +1,4 @@
-namespace MPlayground.MessageInterceptor;
+namespace MessageTools.Interceptor;
 
 public class MassTransitMessageBase
 {
@@ -12,8 +12,9 @@ public class MassTransitMessageBase
     
     public string GetMessageTypeShort()
     {
-        var messageType = MessageType.Last();
-        return messageType.Split(":").Last();
+        var messageType = MessageType.First();
+        var result =  messageType.Split(":").Where((item, index) => index > 2) ;
+        return string.Join(":", result);
     }
 }
 

@@ -5,6 +5,7 @@ BEGIN
     CREATE DATABASE MessageLogDb
 END
 
+GO
 
 USE MessageLogDb
 
