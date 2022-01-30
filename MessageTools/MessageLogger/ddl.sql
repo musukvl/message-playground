@@ -1,17 +1,18 @@
 use master;
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'MessageLogDb')
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = '{0}')
 
 BEGIN
-    CREATE DATABASE MessageLogDb
+    CREATE DATABASE {0};
+    print 'Database {0} created';
 END
 
-GO
 
-USE MessageLogDb
+USE {0};
 
 if exists (select * from sysobjects where name='MessageLog' and xtype='U')
 begin
-Drop TABLE MessageLog
+  Drop TABLE MessageLog;
+  print 'Table MessageLog dropped';
 END
 
 CREATE TABLE MessageLog (
@@ -24,12 +25,12 @@ CREATE TABLE MessageLog (
     ConversationId UNIQUEIDENTIFIER,
     MessageInfo NVARCHAR(MAX),
     MessageBody NVARCHAR(MAX)    
-)
+);
 
 create index MessageLog_ReceivedDate_index
-    on MessageLog (ReceivedDate desc)
-    go
+    on MessageLog (ReceivedDate desc);
 
+print 'Table MessageLog created';
 
 
  

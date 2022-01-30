@@ -1,7 +1,14 @@
 {
   "$schema": "http://json.schemastore.org/launchsettings.json",
   "profiles": {
-    "MessageTools": {
+    "MessageTools: init-log-db": {
+      "commandName": "Project",
+      "commandLineArgs": "init-log-db -c \"Server=localhost,5433;Database=master;User=sa;Password=SqlUser00;TrustServerCertificate=true;MultipleActiveResultSets=true\" -db MessageLogDb",
+      "environmentVariables": {
+      }
+    },
+    
+    "MessageTools: intercept-messages": {
       "commandName": "Project",
       "commandLineArgs": "intercept-messages -c \"Server=localhost,5433;Database=MessageLogDb;User=sa;Password=SqlUser00;TrustServerCertificate=true;MultipleActiveResultSets=true\" -u QueueUser -p QueueUser00",
       "environmentVariables": {        

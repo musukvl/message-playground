@@ -1,5 +1,8 @@
+using McMaster.Extensions.CommandLineUtils;
+
 namespace MessageTools.Commands;
 
+[Command("version", Description = "Returns tool version")]
 public class VersionCommand
 {
     public int OnExecute()

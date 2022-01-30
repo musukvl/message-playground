@@ -16,4 +16,8 @@ public class ConsoleLogger : IMessageLogger
         //Console.WriteLine($"[{basicDeliverEventArgs1..SentTime.ToString("yyyy-MM-dd HH:mm:ss")}]: {messageBase.GetMessageTypeShort()} from {messageBase.Host.ProcessName} {messageBase.ConversationId}");
         return Task.CompletedTask;
     }
+
+    public void Dispose()
+    {
+    }
 }

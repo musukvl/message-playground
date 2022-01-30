@@ -6,7 +6,7 @@ using RabbitMQ.Client.Events;
 
 namespace MessageTools.MessageLogger;
 
-public class MessageDbLogger : IDisposable, IMessageLogger
+public class MessageDbLogger : IMessageLogger
 {
     private readonly SqlConnection _connection;
     
@@ -15,14 +15,7 @@ public class MessageDbLogger : IDisposable, IMessageLogger
         _connection = new SqlConnection(cstring);
         _connection.Open();
     }
-
-    public async Task EnsureDbTable()
-    {
-        var ddl = File.ReadAllText("ddl.sql");
-        await using SqlCommand command = new SqlCommand(ddl, _connection);
-        await command.ExecuteNonQueryAsync();
-    }
-
+    
     const string INSERT_SQL = @"insert into MessageLog (MessageId, MessageType, ConversationId, MessageBody, ReceivedDate, MachineName, ProcessName, Assembly,MessageInfo) 
             values (@MessageId, @MessageType, @ConversationId, @MessageBody, @ReceivedDate, @MachineName, @ProcessName, @Assembly, @MessageInfo);";
     

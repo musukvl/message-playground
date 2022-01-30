@@ -9,6 +9,7 @@ namespace MessageTools;
 [HelpOption(Inherited = true)]
 [Command(Description = "RabbitMQ messaging tools"),
  Subcommand(typeof(InterceptMessageCommand)),
+ Subcommand(typeof(InitLogDbCommand)),
  Subcommand(typeof(VersionCommand))
 ]
 internal class Program
